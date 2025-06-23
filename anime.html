@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamCria - Anime</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/filme.css">
+    <meta name="description" content="Assista animes incríveis no DreamCria">
+</head>
+<body>
+    <!-- Header -->
+    <header class="dreamcria-header" role="banner">
+        <nav class="header-nav" aria-label="Navegação principal">
+            <div class="header-brand">
+                <a href="/" class="brand-link">
+                    <span class="brand-icon">🎬</span>
+                    <span class="brand-text">DreamCria</span>
+                </a>
+            </div>
+
+            <div class="header-actions">
+                <div class="search-dropdown">
+                    <button class="search-toggle" aria-label="Abrir busca" aria-expanded="false">
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </button>
+
+                    <div class="search-menu" role="dialog" aria-label="Menu de busca">
+                        <div class="search-container">
+                            <input 
+                                type="text" 
+                                class="search-input" 
+                                placeholder="Buscar filmes, séries ou animes..."
+                                aria-label="Campo de busca"
+                                autocomplete="off"
+                            >
+                            <div class="search-results" id="searchResults" role="listbox"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/" class="back-button" aria-label="Voltar para página inicial">
+                    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                        <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Anime Banner -->
+    <section class="movie-banner" id="animeBanner" role="img" aria-labelledby="animeTitle">
+        <div class="banner-overlay" aria-hidden="true"></div>
+        <div class="banner-content">
+            <div class="movie-header">
+                <h1 class="movie-title" id="animeTitle">Carregando...</h1>
+                <div class="movie-meta">
+                    <span class="movie-year" id="animeYear" aria-label="Ano de lançamento"></span>
+                    <span class="movie-rating" id="animeRating" aria-label="Avaliação"></span>
+                    <span class="movie-genre" id="animeGenre" aria-label="Gêneros"></span>
+                </div>
+                <p class="movie-synopsis" id="animeSynopsis">Carregando sinopse...</p>
+                <div class="action-buttons">
+                    <button class="play-button" aria-label="Assistir anime">
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                            <path fill="currentColor" d="M8 5v14l11-7z"/>
+                        </svg>
+                        <span>Assistir</span>
+                    </button>
+                    <button class="info-button" onclick="scrollToDetails()" aria-label="Mais informações">
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                        <span>Mais Info</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Anime Details -->
+    <section class="movie-details" id="animeDetailsSection" aria-labelledby="details-title">
+        <div class="container">
+            <h2 id="details-title" class="section-title">Detalhes do Anime</h2>
+
+            <div class="details-grid">
+                <div class="details-main">
+                    <div class="synopsis-section">
+                        <h3>Sinopse</h3>
+                        <p id="animeDetailedSynopsis">Carregando descrição detalhada...</p>
+                    </div>
+
+                    <div class="movie-info">
+                        <div class="info-item">
+                            <strong>Número de Temporadas:</strong>
+                            <span id="animeSeasons">-</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Total de Episódios:</strong>
+                            <span id="animeEpisodes">-</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Status:</strong>
+                            <span id="animeStatus">-</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Idioma Original:</strong>
+                            <span id="animeLanguage">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details-sidebar">
+                    <div class="cast-section">
+                        <h3>Elenco Principal</h3>
+                        <div class="cast-grid" id="castGrid" role="list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" aria-labelledby="video-title">
+        <div class="container">
+            <h2 id="video-title" class="section-title">Trailer</h2>
+            <div class="video-container">
+                <iframe 
+                    id="videoPlayer" 
+                    frameborder="0" 
+                    allowfullscreen
+                    title="Trailer do anime"
+                    loading="lazy"
+                ></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Episode Modal -->
+    <div class="stream-modal" id="episodeModal" role="dialog" aria-modal="true" aria-labelledby="episode-title">
+        <div class="modal-backdrop" aria-hidden="true"></div>
+        <div class="stream-container">
+            <button id="closeEpisodes" class="close-button" aria-label="Fechar seletor de episódios">
+                <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+
+            <div class="episode-selector" id="episodeSelector">
+                <h3 id="episode-title">Selecionar Episódio</h3>
+                <select class="season-select" id="seasonSelect" aria-label="Selecionar temporada">
+                    <option value="">Selecione a Temporada</option>
+                </select>
+                <div class="episode-list" id="episodeList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stream Modal -->
+    <div class="stream-modal" id="streamModal" role="dialog" aria-modal="true" aria-labelledby="stream-title">
+        <div class="modal-backdrop" aria-hidden="true"></div>
+        <div class="stream-container">
+            <button id="closeStream" class="close-button" aria-label="Fechar player">
+                <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+
+            <div class="stream-warning" id="streamWarning">
+                <div class="warning-content">
+                    <div class="warning-icon" aria-hidden="true">⚠️</div>
+                    <h3 id="stream-title">Importante - Leia antes de continuar</h3>
+
+                    <div class="warning-text">
+                        <p>Para a melhor experiência, recomendamos:</p>
+                        <ul>
+                            <li><strong>Use um bloqueador de anúncios</strong> para evitar redirecionamentos</li>
+                            <li><strong>Se for redirecionado:</strong> Volte usando Alt + ← (PC) ou botão Voltar (Mobile)</li>
+                            <li><strong>Não clique em pop-ups</strong> ou anúncios suspeitos</li>
+                            <li><strong>Mantenha seu antivírus ativo</strong></li>
+                        </ul>
+                        <p class="warning-note">Esta é uma fonte externa. Use por sua conta e risco.</p>
+                    </div>
+
+                    <div class="warning-buttons">
+                        <button class="proceed-button" onclick="proceedToWatch()" aria-describedby="stream-title">
+                            Entendi, Continuar
+                        </button>
+                        <button class="cancel-button" onclick="cancelStream()">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <iframe 
+                id="streamFrame" 
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups-to-escape-sandbox" 
+                allowfullscreen 
+                style="display: none;"
+                referrerpolicy="no-referrer"
+                loading="lazy"
+                title="Player de vídeo"
+            ></iframe>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner" aria-hidden="true"></div>
+            <p>Carregando informações do anime...</p>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * DreamCria - Sistema de Páginas de Animes
+         * Gerencia exibição detalhada de animes/séries animadas
+         * 
+         * Quer ter um site/bot customizado? Chame: @v33s3l na DM e faça seu orçamento.
+         */
+        
+        // Configurações da API
+        const API_CONFIG = {
+            key: 'cf72f14362cff1da8bed9fa86831de66',
+            baseUrl: 'https://api.themoviedb.org/3',
+            imageUrl: 'https://image.tmdb.org/t/p/original',
+            posterUrl: 'https://image.tmdb.org/t/p/w200',
+            profileUrl: 'https://image.tmdb.org/t/p/w200',
+            stillUrl: 'https://image.tmdb.org/t/p/w300',
+            streamUrl: 'https://embed.warezcdn.link/serie/'
+        };
+
+        let animeData = null;
+        let animeId = null;
+
+        // Inicialização
+        async function loadAnimeDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            animeId = urlParams.get('id');
+
+            if (!animeId) {
+                showError("ID do anime não encontrado na URL");
+                return;
+            }
+
+            try {
+                setLoading(true);
+
+                const [animeResponse, creditsResponse, videosResponse] = await Promise.all([
+                    fetch(`${API_CONFIG.baseUrl}/tv/${animeId}?api_key=${API_CONFIG.key}&language=pt-BR`),
+                    fetch(`${API_CONFIG.baseUrl}/tv/${animeId}/credits?api_key=${API_CONFIG.key}&language=pt-BR`),
+                    fetch(`${API_CONFIG.baseUrl}/tv/${animeId}/videos?api_key=${API_CONFIG.key}&language=pt-BR`)
+                ]);
+
+                if (!animeResponse.ok) {
+                    throw new Error(`Erro ${animeResponse.status}: ${animeResponse.statusText}`);
+                }
+
+                const [animeDataResult, creditsData, videosData] = await Promise.all([
+                    animeResponse.json(),
+                    creditsResponse.json(),
+                    videosResponse.json()
+                ]);
+
+                animeData = animeDataResult;
+                renderAnimeData(animeDataResult, creditsData, videosData);
+
+            } catch (error) {
+                console.error('Erro ao carregar anime:', error);
+                showError("Erro ao carregar detalhes do anime. Tente novamente.");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        function renderAnimeData(animeData, creditsData, videosData) {
+            // Atualizar banner
+            const banner = document.getElementById("animeBanner");
+            const title = document.getElementById("animeTitle");
+            const year = document.getElementById("animeYear");
+            const rating = document.getElementById("animeRating");
+            const genre = document.getElementById("animeGenre");
+            const synopsis = document.getElementById("animeSynopsis");
+
+            if (banner && animeData.backdrop_path) {
+                banner.style.backgroundImage = `url(${API_CONFIG.imageUrl}${animeData.backdrop_path})`;
+            }
+
+            if (title) title.textContent = animeData.name || 'Título não disponível';
+            if (year && animeData.first_air_date) {
+                year.textContent = new Date(animeData.first_air_date).getFullYear();
+            }
+            if (rating) {
+                rating.textContent = `⭐ ${(animeData.vote_average || 0).toFixed(1)}/10`;
+            }
+            if (genre && animeData.genres) {
+                const genreNames = animeData.genres.map(g => g.name).slice(0, 3).join(', ');
+                genre.textContent = genreNames || 'Gêneros não informados';
+            }
+            if (synopsis) {
+                synopsis.textContent = animeData.overview || 'Sinopse não disponível.';
+            }
+
+            // Atualizar detalhes
+            const detailedSynopsis = document.getElementById("animeDetailedSynopsis");
+            const seasons = document.getElementById("animeSeasons");
+            const episodes = document.getElementById("animeEpisodes");
+            const status = document.getElementById("animeStatus");
+            const language = document.getElementById("animeLanguage");
+
+            if (detailedSynopsis) {
+                detailedSynopsis.textContent = animeData.overview || 'Descrição detalhada não disponível.';
+            }
+            if (seasons) seasons.textContent = animeData.number_of_seasons || 'N/A';
+            if (episodes) episodes.textContent = animeData.number_of_episodes || 'N/A';
+            if (status) status.textContent = getStatusText(animeData.status);
+            if (language) language.textContent = getLanguageName(animeData.original_language);
+
+            // Atualizar elenco
+            updateCast(creditsData);
+
+            // Atualizar trailer
+            updateTrailer(videosData);
+
+            // Atualizar temporadas
+            updateSeasons(animeData);
+
+            // Título da página
+            document.title = `${animeData.name} - DreamCria`;
+        }
+
+        function updateCast(creditsData) {
+            const castGrid = document.getElementById("castGrid");
+            if (!castGrid || !creditsData.cast) return;
+
+            castGrid.innerHTML = '';
+            const mainCast = creditsData.cast.slice(0, 6);
+
+            mainCast.forEach(actor => {
+                const actorElement = document.createElement("div");
+                actorElement.className = "cast-member";
+
+                const profileImage = actor.profile_path 
+                    ? `${API_CONFIG.profileUrl}${actor.profile_path}`
+                    : getPlaceholderImage();
+
+                actorElement.innerHTML = `
+                    <img src="${profileImage}" alt="Foto de ${actor.name}" loading="lazy">
+                    <p>${actor.name}</p>
+                    <small>${actor.character || 'Personagem não informado'}</small>
+                `;
+
+                castGrid.appendChild(actorElement);
+            });
+        }
+
+        function updateTrailer(videosData) {
+            const videoPlayer = document.getElementById("videoPlayer");
+            if (!videoPlayer || !videosData.results) return;
+
+            const trailer = videosData.results.find(video => 
+                video.type === "Trailer" && video.site === "YouTube"
+            ) || videosData.results.find(video => 
+                video.site === "YouTube"
+            );
+
+            if (trailer) {
+                videoPlayer.src = `https://www.youtube.com/embed/${trailer.key}?rel=0&modestbranding=1`;
+            } else {
+                const videoSection = document.querySelector('.video-section');
+                if (videoSection) videoSection.style.display = 'none';
+            }
+        }
+
+        function updateSeasons(animeData) {
+            const seasonSelect = document.getElementById("seasonSelect");
+            if (!seasonSelect || !animeData.seasons) return;
+
+            seasonSelect.innerHTML = '<option value="">Selecione a Temporada</option>';
+            animeData.seasons.forEach(season => {
+                if (season.season_number > 0) {
+                    seasonSelect.innerHTML += `
+                        <option value="${season.season_number}">
+                            Temporada ${season.season_number}
+                        </option>
+                    `;
+                }
+            });
+        }
+
+        function getStatusText(status) {
+            const statusMap = {
+                'Returning Series': 'Em exibição',
+                'Ended': 'Finalizada',
+                'Canceled': 'Cancelada',
+                'In Production': 'Em produção'
+            };
+            return statusMap[status] || status || 'Status desconhecido';
+        }
+
+        function getLanguageName(code) {
+            const languages = {
+                'en': 'Inglês',
+                'pt': 'Português',
+                'ja': 'Japonês',
+                'ko': 'Coreano',
+                'zh': 'Chinês',
+                'es': 'Espanhol',
+                'fr': 'Francês'
+            };
+            return languages[code] || code?.toUpperCase() || 'N/A';
+        }
+
+        function getPlaceholderImage() {
+            return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiBmaWxsPSIjMkQyRDVGIi8+CjxjaXJjbGUgY3g9Ijc1IiBjeT0iNjAiIHI9IjIwIiBmaWxsPSIjOEI1Q0Y2Ii8+CjxwYXRoIGQ9Ik0zMCAxMjBDMzAgMTA0IDUxIDkyIDc1IDkyUzEyMCAxMDQgMTIwIDEyMFYxMzBIMzBWMTIwWiIgZmlsbD0iIzhCNUNGNiIvPgo8L3N2Zz4=';
+        }
+
+        function setLoading(loading) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.style.display = loading ? 'flex' : 'none';
+            }
+        }
+
+        function showError(message) {
+            const banner = document.getElementById("animeBanner");
+            if (banner) {
+                banner.innerHTML = `
+                    <div class="banner-overlay"></div>
+                    <div class="banner-content">
+                        <div class="movie-header">
+                            <h1 class="movie-title" style="color: var(--accent-color);">⚠️ Erro</h1>
+                            <p class="movie-synopsis">${message}</p>
+                            <div class="action-buttons">
+                                <button class="play-button" onclick="location.reload()">
+                                    <span>Tentar Novamente</span>
+                                </button>
+                                <a href="index.html" class="info-button">
+                                    <span>Voltar ao Início</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function scrollToDetails() {
+            const detailsSection = document.getElementById('animeDetailsSection');
+            if (detailsSection) {
+                detailsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAnimeDetails();
+
+            // Play button
+            const playButton = document.querySelector('.play-button');
+            if (playButton) {
+                playButton.addEventListener('click', () => {
+                    const episodeModal = document.getElementById('episodeModal');
+                    if (episodeModal) episodeModal.classList.add('active');
+                });
+            }
+
+            // Busca
+            initializeSearch();
+
+            // Modals
+            initializeModals();
+        });
+
+        function initializeSearch() {
+            const searchIcon = document.querySelector('.search-toggle');
+            const searchMenu = document.querySelector('.search-menu');
+            const searchInput = document.querySelector('.search-input');
+            const searchResults = document.getElementById('searchResults');
+
+            if (!searchIcon || !searchMenu || !searchInput || !searchResults) return;
+
+            searchIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                searchMenu.classList.toggle('active');
+                if (searchMenu.classList.contains('active')) {
+                    searchInput.focus();
+                }
+            });
+
+            let searchTimeout;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                const query = e.target.value.trim();
+
+                if (query.length < 2) {
+                    searchResults.innerHTML = '';
+                    return;
+                }
+
+                searchTimeout = setTimeout(() => performSearch(query), 300);
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!searchMenu.contains(e.target) && e.target !== searchIcon) {
+                    searchMenu.classList.remove('active');
+                }
+            });
+        }
+
+        async function performSearch(query) {
+            const searchResults = document.getElementById('searchResults');
+            if (!searchResults) return;
+
+            try {
+                searchResults.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-muted);">Buscando...</div>';
+
+                const response = await fetch(`${API_CONFIG.baseUrl}/search/tv?api_key=${API_CONFIG.key}&language=pt-BR&query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+
+                if (!data.results || data.results.length === 0) {
+                    searchResults.innerHTML = '<div style="padding: 1rem; text-align: center; color: var(--text-muted);">Nenhum resultado encontrado</div>';
+                    return;
+                }
+
+                const filteredResults = data.results
+                    .filter(anime => anime.poster_path)
+                    .slice(0, 5);
+
+                searchResults.innerHTML = filteredResults.map(anime => `
+                    <div class="search-result-item" onclick="window.location.href='anime.html?id=${anime.id}'" style="cursor: pointer;">
+                        <img src="${API_CONFIG.posterUrl}${anime.poster_path}" alt="${anime.name}" loading="lazy">
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary);">${anime.name}</div>
+                            <small style="color: var(--text-muted);">${new Date(anime.first_air_date || '').getFullYear() || 'N/A'} • ⭐ ${(anime.vote_average || 0).toFixed(1)}</small>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Erro na busca:', error);
+                searchResults.innerHTML = '<div style="padding: 1rem; text-align: center; color: #ef4444;">Erro ao buscar animes</div>';
+            }
+        }
+
+        function initializeModals() {
+            // Episode modal
+            const episodeModal = document.getElementById('episodeModal');
+            const closeEpisodes = document.getElementById('closeEpisodes');
+            const seasonSelect = document.getElementById('seasonSelect');
+            const episodeList = document.getElementById('episodeList');
+
+            if (closeEpisodes) {
+                closeEpisodes.addEventListener('click', () => {
+                    episodeModal?.classList.remove('active');
+                });
+            }
+
+            if (seasonSelect) {
+                seasonSelect.addEventListener('change', async (e) => {
+                    const seasonNumber = e.target.value;
+                    if (!seasonNumber) {
+                        episodeList.innerHTML = '';
+                        return;
+                    }
+
+                    episodeList.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-muted);">Carregando episódios...</div>';
+
+                    try {
+                        const response = await fetch(
+                            `${API_CONFIG.baseUrl}/tv/${animeId}/season/${seasonNumber}?api_key=${API_CONFIG.key}&language=pt-BR`
+                        );
+                        const seasonData = await response.json();
+
+                        episodeList.innerHTML = seasonData.episodes.map(episode => `
+                            <div class="episode-item" onclick="playEpisode(${seasonNumber}, ${episode.episode_number})" style="cursor: pointer;">
+                                <img src="${episode.still_path ? API_CONFIG.stillUrl + episode.still_path : getPlaceholderImage()}" 
+                                     alt="Episódio ${episode.episode_number}" loading="lazy">
+                                <div>
+                                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Episódio ${episode.episode_number}</div>
+                                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">${episode.name}</h4>
+                                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">${episode.overview || 'Nenhuma descrição disponível.'}</p>
+                                </div>
+                            </div>
+                        `).join('');
+
+                    } catch (error) {
+                        console.error('Erro ao carregar episódios:', error);
+                        episodeList.innerHTML = '<div style="padding: 2rem; text-align: center; color: #ef4444;">Erro ao carregar episódios</div>';
+                    }
+                });
+            }
+
+            // Stream modal
+            const streamModal = document.getElementById('streamModal');
+            const closeStream = document.getElementById('closeStream');
+            const modalBackdrop = document.querySelector('.modal-backdrop');
+
+            if (closeStream) {
+                closeStream.addEventListener('click', () => cancelStream());
+            }
+
+            if (modalBackdrop) {
+                modalBackdrop.addEventListener('click', () => {
+                    if (episodeModal?.classList.contains('active')) {
+                        episodeModal.classList.remove('active');
+                    }
+                    if (streamModal?.classList.contains('active')) {
+                        cancelStream();
+                    }
+                });
+            }
+
+            // Keyboard events
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (streamModal?.classList.contains('active')) {
+                        cancelStream();
+                    } else if (episodeModal?.classList.contains('active')) {
+                        episodeModal.classList.remove('active');
+                    }
+                }
+            });
+        }
+
+        function playEpisode(seasonNumber, episodeNumber) {
+            const episodeModal = document.getElementById('episodeModal');
+            const streamModal = document.getElementById('streamModal');
+            const streamWarning = document.getElementById('streamWarning');
+            const streamFrame = document.getElementById('streamFrame');
+
+            if (episodeModal) episodeModal.classList.remove('active');
+            if (streamModal) streamModal.classList.add('active');
+
+            if (streamWarning) streamWarning.style.display = 'flex';
+            if (streamFrame) {
+                streamFrame.style.display = 'none';
+                streamFrame.src = '';
+            }
+
+            window.proceedToWatch = () => {
+                if (streamWarning) streamWarning.style.display = 'none';
+                if (streamFrame) {
+                    streamFrame.style.display = 'block';
+                    streamFrame.src = `${API_CONFIG.streamUrl}${animeId}/${seasonNumber}/${episodeNumber}`;
+                }
+            };
+
+            window.cancelStream = () => {
+                if (streamModal) streamModal.classList.remove('active');
+                if (streamFrame) streamFrame.src = '';
+            };
+        }
+
+        console.log('🎬 Página de anime DreamCria inicializada!');
+    </script>
+
+    <!-- Footer -->
+    <footer style="background: rgba(15, 15, 35, 0.9); padding: 2rem 0; text-align: center; margin-top: 4rem;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <h4 style="color: #8b5cf6; font-size: 1.5rem; margin-bottom: 0.5rem;">DreamCria</h4>
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 1rem;">Sua plataforma de streaming favorita</p>
+            <p style="color: #666; font-size: 0.9rem; margin: 0;">
+                &copy; 2025 DreamCria. Todos os direitos reservados.
+            </p>
+            <p style="color: #666; font-size: 0.8rem; margin-top: 0.5rem;">
+                Quer ter um site/bot customizado? Chame: @v33s3l na DM e faça seu orçamento.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

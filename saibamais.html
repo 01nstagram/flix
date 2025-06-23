@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PinkFlix 3.0 - Saiba Mais</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/saibamais.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // FAQ accordion functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const isActive = answer.style.display === 'block';
+                    
+                    document.querySelectorAll('.faq-answer').forEach(a => {
+                        a.style.display = 'none';
+                    });
+                    
+                    if (!isActive) {
+                        answer.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="logo">PinkFlix</a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="index.html#lancamentos" class="nav-link">Lançamentos</a>
+            <a href="index.html#categorias" class="nav-link">Categorias</a>
+            <a href="saibamais.html" class="nav-link">Saiba Mais</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h1 class="page-title">Descubra o PinkFlix</h1>
+
+        <section class="info-section">
+            <h2 class="info-title">Quem Somos</h2>
+            <p class="info-text">
+                A PinkFlix é a plataforma de streaming mais completa do Brasil, com um catálogo diversificado de filmes, séries e animes para todos os gostos. Nascemos com a missão de democratizar o acesso ao entretenimento de qualidade, oferecendo uma experiência imersiva e personalizada para cada usuário.
+            </p>
+            <p class="info-text">
+                Nossa plataforma foi desenvolvida por amantes de cinema e tecnologia, que se uniram para criar uma solução inovadora que combina conteúdo premium com a melhor experiência de usuário do mercado.
+            </p>
+
+            <div class="info-card-container">
+                <div class="info-card">
+                    <svg class="info-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                    <h3 class="info-card-title">Conteúdo Diversificado</h3>
+                    <p class="info-card-text">Oferecemos um catálogo com milhares de títulos, desde grandes blockbusters até produções independentes e exclusivas.</p>
+                </div>
+
+                <div class="info-card">
+                    <svg class="info-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 3a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2H5zm4 5h6m-6 4h6m-6 4h6"></path>
+                    </svg>
+                    <h3 class="info-card-title">Experiência Personalizada</h3>
+                    <p class="info-card-text">Nosso algoritmo inteligente aprende com suas preferências para recomendar conteúdos que combinam com seu gosto.</p>
+                </div>
+
+                <div class="info-card">
+                    <svg class="info-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                    </svg>
+                    <h3 class="info-card-title">Tecnologia de Ponta</h3>
+                    <p class="info-card-text">Utilizamos as mais avançadas tecnologias para garantir streaming em alta definição e sem interrupções.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2 class="info-title">Nossos Diferenciais</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-image">
+                    <!-- Placeholder for image -->
+                    <div style="width: 100%; height: 100%; background: linear-gradient(45deg, #1a1a1a, #2a2a2a); display: flex; align-items: center; justify-content: center;">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#e50914" stroke-width="2">
+                            <path d="M7 4v16m13-8H7m13 0-5-5m5 5-5 5"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="feature-text">
+                    <h3 class="feature-title">Streaming Sem Limites</h3>
+                    <ul class="feature-list">
+                        <li class="feature-item">Assista em até 4 telas simultaneamente</li>
+                        <li class="feature-item">Download para assistir offline</li>
+                        <li class="feature-item">Qualidade de até 4K Ultra HD</li>
+                        <li class="feature-item">Áudio imersivo com Dolby Atmos</li>
+                        <li class="feature-item">Atualizações semanais de conteúdo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-text">
+                    <h3 class="feature-title">Para Toda a Família</h3>
+                    <ul class="feature-list">
+                        <li class="feature-item">Perfis personalizados para cada membro</li>
+                        <li class="feature-item">Controle parental avançado</li>
+                        <li class="feature-item">Conteúdo exclusivo para crianças</li>
+                        <li class="feature-item">Assistente de recomendações familiares</li>
+                        <li class="feature-item">Interface intuitiva para todas as idades</li>
+                    </ul>
+                </div>
+                <div class="feature-image">
+                    <!-- Placeholder for image -->
+                    <div style="width: 100%; height: 100%; background: linear-gradient(45deg, #1a1a1a, #2a2a2a); display: flex; align-items: center; justify-content: center;">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#e50914" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2 class="info-title">Nossos Planos</h2>
+            
+            <div class="info-card-container">
+                <div class="info-card">
+                    <h3 class="info-card-title">Plano Básico</h3>
+                    <p class="info-card-text">
+                        <strong style="font-size: 1.8rem; color: var(--light-text);">R$ 00,00</strong><br>
+                        <span style="font-size: 0.9rem;">/mês</span>
+                    </p>
+                    <ul style="list-style: none; margin: 1.5rem 0; color: var(--gray-text);">
+                        <li style="margin-bottom: 0.8rem;">✓ 1 tela simultânea</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Qualidade HD</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Catálogo completo de filmes e séries</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Sem anúncios</li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="border-color: var(--primary-color); box-shadow: var(--neon-glow);">
+                    <div style="position: absolute; top: 0; right: 1.5rem; background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 0 0 8px 8px; font-weight: 600; font-size: 0.9rem;">Mais Popular</div>
+                    <h3 class="info-card-title">Plano Padrão</h3>
+                    <p class="info-card-text">
+                        <strong style="font-size: 1.8rem; color: var(--light-text);">R$ 00,00</strong><br>
+                        <span style="font-size: 0.9rem;">/mês</span>
+                    </p>
+                    <ul style="list-style: none; margin: 1.5rem 0; color: var(--gray-text);">
+                        <li style="margin-bottom: 0.8rem;">✓ 2 telas simultâneas</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Qualidade Full HD</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Catálogo completo de filmes e séries</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Download para assistir offline</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Sem anúncios</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3 class="info-card-title">Plano Premium</h3>
+                    <p class="info-card-text">
+                        <strong style="font-size: 1.8rem; color: var(--light-text);">R$ 00,00</strong><br>
+                        <span style="font-size: 0.9rem;">/mês</span>
+                    </p>
+                    <ul style="list-style: none; margin: 1.5rem 0; color: var(--gray-text);">
+                        <li style="margin-bottom: 0.8rem;">✓ 4 telas simultâneas</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Qualidade 4K Ultra HD</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Áudio Dolby Atmos</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Catálogo completo + conteúdo exclusivo</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Download para assistir offline</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Sem anúncios</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2 class="info-title">Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Como funciona a SuperFlix?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    A PinkFlix é um serviço de streaming por assinatura que permite assistir a filmes, séries e animes em qualquer dispositivo conectado à internet. Após se inscrever e escolher um plano, você terá acesso imediato a todo nosso catálogo. É simples, sem contratos e você pode cancelar a qualquer momento.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Quanto custa a SuperFlix?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    A PinkFlix oferece três planos de assinatura: Básico (R$ 00,00/mês), Padrão (R$ 00,00/mês) e Premium (R$ 00,00/mês). Cada plano oferece diferentes recursos como qualidade de vídeo, número de telas simultâneas e opções de download.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Posso assistir em qualquer dispositivo?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    Sim! Você pode assistir PinkFlix em diversos dispositivos, incluindo Smart TVs, consoles de videogame, smartphones, tablets, navegadores web e dispositivos de streaming como Chromecast, Apple TV e Amazon Fire Stick.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Posso cancelar minha assinatura a qualquer momento?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    Absolutamente! A PinkFlix não tem contratos de fidelidade. Você pode assinar e cancelar quando quiser, sem taxas de cancelamento. Seu acesso continuará disponível até o final do período já pago.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Com que frequência são adicionados novos títulos?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    Adicionamos novos títulos todas as semanas! Nosso catálogo está em constante expansão, com novos filmes, séries e animes sendo incluídos regularmente. Nossos assinantes são os primeiros a saber sobre os lançamentos através de nossas notificações personalizadas.
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2 class="cta-title">Experimente a PinkFlix Hoje Mesmo!</h2>
+            <p class="cta-text">
+                Junte-se a milhões de assinantes que já descobriram a melhor experiência de streaming do Brasil. Assine agora e tenha acesso instant

@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamCria - Descubra, Assista, Sonhe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/index.css">
+    <meta name="description" content="DreamCria - Sua plataforma de streaming favorita. Encontre filmes, séries e animes incríveis.">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav-container" aria-label="Navegação principal">
+            <div class="logo-container">
+                <h1 class="logo">
+                    <span class="logo-icon">🎬</span>
+                    DreamCria
+                </h1>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#" class="nav-link active" aria-current="page" data-category="all">Início</a>
+                <a href="#" class="nav-link" data-category="movie">Filmes</a>
+                <a href="#" class="nav-link" data-category="tv">Séries</a>
+                <a href="#" class="nav-link" data-category="anime">Animes</a>
+            </div>
+
+            <div class="header-actions">
+                <button class="search-toggle" aria-label="Abrir busca" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 21L16.514 16.506M19 10.5C19 15.194 15.194 19 10.5 19S2 15.194 2 10.5 5.806 2 10.5 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                
+                <div class="search-menu">
+                    <div class="search-container">
+                        <input 
+                            type="text" 
+                            class="search-input" 
+                            placeholder="Buscar filmes, séries ou animes..."
+                            aria-label="Campo de busca"
+                            autocomplete="off"
+                        >
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner" id="heroBanner" aria-labelledby="hero-title">
+        <div class="hero-background"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+            <h2 id="hero-title" class="hero-title">Carregando...</h2>
+            <p class="hero-description">Carregando descrição...</p>
+            <div class="hero-buttons">
+                <button class="hero-play-btn" id="heroPlayBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M8 5v14l11-7z" fill="currentColor"/>
+                    </svg>
+                    Assistir
+                </button>
+                <button class="hero-info-btn" id="heroInfoBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/>
+                    </svg>
+                    Mais Info
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <main class="content-main">
+        <!-- Em Alta -->
+        <section class="content-section" id="trendingSection">
+            <h3 class="section-title">🔥 Em Alta</h3>
+            <div class="content-carousel" id="trendingCarousel">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Carregando conteúdo em alta...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filmes Populares -->
+        <section class="content-section" id="moviesSection">
+            <h3 class="section-title">🎬 Filmes Populares</h3>
+            <div class="content-carousel" id="moviesCarousel">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Carregando filmes...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Séries Populares -->
+        <section class="content-section" id="seriesSection">
+            <h3 class="section-title">📺 Melhores Séries</h3>
+            <div class="content-carousel" id="seriesCarousel">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Carregando as melhores séries...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animes -->
+        <section class="content-section" id="animesSection">
+            <h3 class="section-title">🎯 Melhores Animes</h3>
+            <div class="content-carousel" id="animesCarousel">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Carregando os melhores animes...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filmes de Ação -->
+        <section class="content-section" id="actionSection">
+            <h3 class="section-title">💥 Melhores Filmes de Ação</h3>
+            <div class="content-carousel" id="actionCarousel">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Carregando os melhores filmes de ação...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comédias -->
+        <section class="content-section" id="comedySection">
+            <h3 class="section-title">😂 Melhores Comédias</h3>
+            <div class="content-carousel" id="comedyCarousel">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Carregando as melhores comédias...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dramas -->
+        <section class="content-section" id="dramaSection">
+            <h3 class="section-title">🎭 Melhores Dramas</h3>
+            <div class="content-carousel" id="dramaCarousel">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Carregando os melhores dramas...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terror -->
+        <section class="content-section" id="horrorSection">
+            <h3 class="section-title">👻 Melhores Filmes de Terror</h3>
+            <div class="content-carousel" id="horrorCarousel">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Carregando os melhores filmes de terror...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ficção Científica -->
+        <section class="content-section" id="scifiSection">
+            <h3 class="section-title">🚀 Melhor Ficção Científica</h3>
+            <div class="content-carousel" id="scifiCarousel">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Carregando a melhor ficção científica...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Romance -->
+        <section class="content-section" id="romanceSection">
+            <h3 class="section-title">💖 Melhores Romances</h3>
+            <div class="content-carousel" id="romanceCarousel">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Carregando os melhores romances...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content" style="text-align: center;">
+                <div class="footer-brand">
+                    <h4 class="footer-logo">DreamCria</h4>
+                    <p>Sua plataforma de streaming favorita</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DreamCria. Todos os direitos reservados.</p>
+                <p style="color: #666; font-size: 0.8rem; margin-top: 0.5rem;">
+                    Quer ter um site/bot customizado? Chame: @v33s3l na DM e faça seu orçamento.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./src/main.js"></script>
+</body>
+</html>

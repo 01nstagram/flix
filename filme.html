@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamCria - Filme</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/filme.css">
+    <meta name="description" content="Assista filmes incríveis no DreamCria">
+    <script>
+        /**
+         * DreamCria - Página de Filmes
+         * Sistema de proteção básica e inicialização
+         * 
+         * Quer ter um site/bot customizado? Chame: @v33s3l na DM e faça seu orçamento.
+         */
+        
+        // Proteção simples contra inspeção
+        document.addEventListener('contextmenu', (e) => { 
+            e.preventDefault(); 
+            console.log('🎬 DreamCria - Proteção ativa');
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) || 
+                (e.key === 'F12') || 
+                (e.ctrlKey && e.key === 's') || 
+                (e.key === 'S' && e.metaKey) ||
+                (e.key === 'i' && e.metaKey && e.altKey)) {
+                e.preventDefault();
+                console.log('🎬 DreamCria - Ação bloqueada');
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="dreamcria-header" role="banner">
+        <nav class="header-nav" aria-label="Navegação principal">
+            <div class="header-brand">
+                <a href="/" class="brand-link">
+                    <span class="brand-icon">🎬</span>
+                    <span class="brand-text">DreamCria</span>
+                </a>
+            </div>
+            
+            <div class="header-actions">
+                <div class="search-dropdown">
+                    <button class="search-toggle" aria-label="Abrir busca" aria-expanded="false">
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </button>
+                    
+                    <div class="search-menu" role="dialog" aria-label="Menu de busca">
+                        <div class="search-container">
+                            <input 
+                                type="text" 
+                                class="search-input" 
+                                placeholder="Buscar filmes, séries ou animes..."
+                                aria-label="Campo de busca"
+                                autocomplete="off"
+                            >
+                            <div class="search-results" id="searchResults" role="listbox"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="/" class="back-button" aria-label="Voltar para página inicial">
+                    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                        <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Movie Banner -->
+    <section class="movie-banner" id="movieBanner" role="img" aria-labelledby="movieTitle">
+        <div class="banner-overlay" aria-hidden="true"></div>
+        <div class="banner-content">
+            <div class="movie-header">
+                <h1 class="movie-title" id="movieTitle">Carregando...</h1>
+                <div class="movie-meta">
+                    <span class="movie-year" id="movieYear" aria-label="Ano de lançamento"></span>
+                    <span class="movie-rating" id="movieRating" aria-label="Avaliação"></span>
+                    <span class="movie-genre" id="movieGenre" aria-label="Gêneros"></span>
+                </div>
+                <p class="movie-synopsis" id="movieSynopsis">Carregando sinopse...</p>
+                <div class="action-buttons">
+                    <button class="play-button" aria-label="Assistir filme">
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                            <path fill="currentColor" d="M8 5v14l11-7z"/>
+                        </svg>
+                        <span>Assistir</span>
+                    </button>
+                    <button class="info-button" onclick="scrollToDetails()" aria-label="Mais informações">
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                        <span>Mais Info</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Movie Details -->
+    <section class="movie-details" id="movieDetailsSection" aria-labelledby="details-title">
+        <div class="container">
+            <h2 id="details-title" class="section-title">Detalhes do Filme</h2>
+            
+            <div class="details-grid">
+                <div class="details-main">
+                    <div class="synopsis-section">
+                        <h3>Sinopse</h3>
+                        <p id="movieDetailedSynopsis">Carregando descrição detalhada...</p>
+                    </div>
+                    
+                    <div class="movie-info">
+                        <div class="info-item">
+                            <strong>Duração:</strong>
+                            <span id="movieDuration">-</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Orçamento:</strong>
+                            <span id="movieBudget">-</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Bilheteria:</strong>
+                            <span id="movieRevenue">-</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Idioma Original:</strong>
+                            <span id="movieLanguage">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="details-sidebar">
+                    <div class="cast-section">
+                        <h3>Elenco Principal</h3>
+                        <div class="cast-grid" id="castGrid" role="list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" aria-labelledby="video-title">
+        <div class="container">
+            <h2 id="video-title" class="section-title">Trailer</h2>
+            <div class="video-container">
+                <iframe 
+                    id="videoPlayer" 
+                    frameborder="0" 
+                    allowfullscreen
+                    title="Trailer do filme"
+                    loading="lazy"
+                ></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stream Modal -->
+    <div class="stream-modal" id="streamModal" role="dialog" aria-modal="true" aria-labelledby="stream-title">
+        <div class="modal-backdrop" aria-hidden="true"></div>
+        <div class="stream-container">
+            <button id="closeStream" class="close-button" aria-label="Fechar player">
+                <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+            
+            <div class="stream-warning" id="streamWarning">
+                <div class="warning-content">
+                    <div class="warning-icon" aria-hidden="true">⚠️</div>
+                    <h3 id="stream-title">Importante - Leia antes de continuar</h3>
+                    
+                    <div class="warning-text">
+                        <p>Para a melhor experiência, recomendamos:</p>
+                        <ul>
+                            <li><strong>Use um bloqueador de anúncios</strong> para evitar redirecionamentos</li>
+                            <li><strong>Se for redirecionado:</strong> Volte usando Alt + ← (PC) ou botão Voltar (Mobile)</li>
+                            <li><strong>Não clique em pop-ups</strong> ou anúncios suspeitos</li>
+                            <li><strong>Mantenha seu antivírus ativo</strong></li>
+                        </ul>
+                        <p class="warning-note">Esta é uma fonte externa. Use por sua conta e risco.</p>
+                    </div>
+                    
+                    <div class="warning-buttons">
+                        <button class="proceed-button" onclick="proceedToWatch()" aria-describedby="stream-title">
+                            Entendi, Continuar
+                        </button>
+                        <button class="cancel-button" onclick="cancelStream()">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <iframe 
+                id="streamFrame" 
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups-to-escape-sandbox" 
+                allowfullscreen 
+                style="display: none;"
+                referrerpolicy="no-referrer"
+                loading="lazy"
+                title="Player de vídeo"
+            ></iframe>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner" aria-hidden="true"></div>
+            <p>Carregando informações do filme...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: rgba(15, 15, 35, 0.9); padding: 2rem 0; text-align: center; margin-top: 4rem;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <h4 style="color: #8b5cf6; font-size: 1.5rem; margin-bottom: 0.5rem;">DreamCria</h4>
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 1rem;">Sua plataforma de streaming favorita</p>
+            <p style="color: #666; font-size: 0.9rem; margin: 0;">
+                &copy; 2025 DreamCria. Todos os direitos reservados.
+            </p>
+            <p style="color: #666; font-size: 0.8rem; margin-top: 0.5rem;">
+                Quer ter um site/bot customizado? Chame: @v33s3l na DM e faça seu orçamento.
+            </p>
+        </div>
+    </footer>
+
+    <script src="src/filme.js"></script>
+</body>
+</html>
